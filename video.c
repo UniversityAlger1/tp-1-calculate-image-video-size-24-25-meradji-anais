@@ -14,7 +14,7 @@ float video(int w, int h, int durationMovie, int durationCredits, int fps, char*
    // YOUR CODE HERE - BEGIN
    float result=(w*h*24)*durationMovie*fps+(w*h*8)*durationCredits*fps;
       if (strcmp(unit, "bt")==0){
-      return result; 
+      return (result/8); 
    }
    else if (strcmp(unit, "ko")==0){
       return (result/8)/1024; 
@@ -27,7 +27,7 @@ float video(int w, int h, int durationMovie, int durationCredits, int fps, char*
       return (((result/8)/1024)/1024)/1024;  
    }
    else {
-      printf("The unit you entered if false");
+      printf("The unit you entered is false");
       return 0;
    }
    // YOUR CODE HERE - END
