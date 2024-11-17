@@ -1,4 +1,5 @@
 #include <string.h>
+#include <stdio.h>
 #include "config/video.h"
 
 // Parameters:
@@ -12,7 +13,11 @@
 
 float video(int w, int h, int durationMovie, int durationCredits, int fps, char* unit) {
    // YOUR CODE HERE - BEGIN
-   float result=(w*h*24)*durationMovie*fps+(w*h*8)*durationCredits*fps;
+   double a=(double)(w*h*24)*durationMovie*fps;
+   double b=(double)(w*h*8)*durationCredits*fps;
+   
+   double result=a+b;
+
       if (strcmp(unit, "bt")==0){
       return (result/8); 
    }
@@ -50,5 +55,5 @@ float video(int w, int h, int durationMovie, int durationCredits, int fps, char*
    printf("enter unit \n");
    scanf("%s",unit);
    
-   printf("The result in %s is %f" ,unit,video( w,  h, durationMovie,durationCredits,fps, unit));
+   printf("The result in %s is %f" ,unit, video( w,  h, durationMovie,durationCredits,fps, unit));
 } */
