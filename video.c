@@ -50,5 +50,5 @@ float video(int w, int h, int durationMovie, int durationCredits, int fps, char*
    printf("enter unit \n");
    scanf("%s",unit);
    
-   printf("The result in %s is %f" ,unit, coloredBitmap( w,  h, durationMovie,durationCredits,fps, unit));
+   printf("The result in %s is %f" ,unit,video( w,  h, durationMovie,durationCredits,fps, unit));
 } */
