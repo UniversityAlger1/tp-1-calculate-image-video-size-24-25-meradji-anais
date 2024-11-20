@@ -1,59 +1,41 @@
+// test du code 
+
 #include <string.h>
 #include <stdio.h>
 #include "config/video.h"
 
 // Parameters:
 //   w: width of the image
-//   h: height of the image
-//   durationMovie: duration in second of movie (colored image)
-//   durationCredits: duration in second of credit (image Black/White)
-//   unit: Unit of the output value. It could be 'bt' byte, 'ko' kilobits, 'mo' megabits, 'go' gigabits
+//   h: height of the imag
+//   durationMovie: duration in seconds of the movie (colored image)
+//   durationCredits: duration in seconds of credits (black/white image)
+//   unit: Unit of the output value. It could be 'bt' for bytes, 'ko' for kilobits, 'mo' for megabits, 'go' for gigabits
 // Return value
-//   colored video size (based on the unit passed parametter)
-
+//   colored video size (based on the unit passed parameter)
 float video(int w, int h, int durationMovie, int durationCredits, int fps, char* unit) {
-   // YOUR CODE HERE - BEGIN
-   double a=(double)(w*h*24)*durationMovie*fps;
-   double b=(double)(w*h*8)*durationCredits*fps;
-   
-   double result=a+b;
+    // Bits per pixel for colored image (24 bits)
+    float bitsPerPixel = 24;
 
-      if (strcmp(unit, "bt")==0){
-      return (result/8); 
-   }
-   else if (strcmp(unit, "ko")==0){
-      return (result/8)/1024; 
-                                    
-   }
-   else if (strcmp(unit, "mo")==0){
-      return ((result/8)/1024)/1024;  
-   }
-     else if (strcmp(unit, "go")==0){
-      return (((result/8)/1024)/1024)/1024;  
-   }
-   else {
-      printf("The unit you entered is false");
-      return 0;
-   }
-   // YOUR CODE HERE - END
- 
+    float clrImage = w * h * bitsPerPixel * durationMovie * fps;
+    float BImage = w * h * durationCredits * fps;
+    float sizeInBits = clrImage + BImage; // Add to total size in bits
+    float size;
+
+
+
+    // Convert size based on the requested unit
+    if (strcmp(unit, "bt") == 0) {
+        size = sizeInBits; // Convert to bytes
+    } else if (strcmp(unit, "ko") == 0) {
+        size = sizeInBits / (1024); // Convert to kilobits
+    } else if (strcmp(unit, "mo") == 0) {
+        size = sizeInBits / (1024 * 1024); // Convert to megabits
+    } else if (strcmp(unit, "go") == 0) {
+        size = sizeInBits / (1024 * 1024 * 1024); // Convert to gigabits
+    } else {
+        // If the unit is not recognized, return -1 or some error value
+        return -1.0f;
+    }
+
+    return size / 8;
 }
-
-/* int main (){
-   int w,h, durationMovie,durationCredits,fps; //  int durationMovie, int durationCredits, int fps, char* unit
-   char unit[5];
-   printf("enter w \n");
-   scanf("%d",&w);
-   printf("enter h \n");
-   scanf("%d",&h);
-   printf("enter the duration of the movie in seconds \n");
-   scanf("%d",&durationMovie);
-   printf("enter the duration of the credits in seconds \n");
-   scanf("%d",&durationCredits);
-   printf("enter the fps \n");
-   scanf("%d",&fps);
-   printf("enter unit \n");
-   scanf("%s",unit);
-   
-   printf("The result in %s is %f" ,unit, video( w,  h, durationMovie,durationCredits,fps, unit));
-} */
